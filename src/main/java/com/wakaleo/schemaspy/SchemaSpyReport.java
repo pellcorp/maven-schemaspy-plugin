@@ -408,7 +408,7 @@ public class SchemaSpyReport extends AbstractMojo {
 	 */
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		if ( skip ) {
-            getLog().info( "Skipping cobertura execution" );
+            getLog().info( "Skipping schemaspy execution" );
             return;
         }
 
