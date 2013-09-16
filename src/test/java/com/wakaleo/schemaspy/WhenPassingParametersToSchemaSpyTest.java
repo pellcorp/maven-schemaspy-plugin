@@ -17,7 +17,7 @@ public class WhenPassingParametersToSchemaSpyTest extends AbstractMojoTestCase {
     	MockSchemaAnalyzer analyzer = new MockSchemaAnalyzer();
         mojo.setSchemaAnalyzer(analyzer);
         
-        mojo.executeReport(Locale.getDefault());
+        mojo.execute();
         
         assertThat(analyzer.getConfig(), is(notNullValue()));
         assertThat(analyzer.getConfig().getDriverPath(), containsString("oracle"));

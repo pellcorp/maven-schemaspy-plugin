@@ -32,7 +32,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         SchemaSpyReport mojo = (SchemaSpyReport) lookupMojo("schemaspy",
                 testPom);
-        mojo.executeReport(Locale.getDefault());
+        mojo.execute();
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
@@ -47,7 +47,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         SchemaSpyReport mojo = (SchemaSpyReport) lookupMojo("schemaspy",
                 testPom);
-        mojo.executeReport(Locale.getDefault());
+        mojo.execute();
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
@@ -62,7 +62,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         SchemaSpyReport mojo = (SchemaSpyReport) lookupMojo("schemaspy",
                 testPom);
-        mojo.executeReport(Locale.getDefault());
+        mojo.execute();
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
