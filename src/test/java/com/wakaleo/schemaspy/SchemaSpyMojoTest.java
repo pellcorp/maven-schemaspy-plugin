@@ -35,7 +35,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
         mojo.execute();
 
         // check if the reports generated
-        File generatedFile = new File("./target/reports/test/schemaspy/index.html");
+        File generatedFile = new File("./target/reports/test/index.html");
         //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
     }
@@ -50,7 +50,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
         mojo.execute();
 
         // check if the reports generated
-        File generatedFile = new File("./target/reports/test/schemaspy/index.html");
+        File generatedFile = new File("./target/reports/test/index.html");
         //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
     }
@@ -65,7 +65,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
         mojo.execute();
 
         // check if the reports generated
-        File generatedFile = new File("./target/reports/test/schemaspy/index.html");
+        File generatedFile = new File("./target/reports/test/index.html");
         //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
         

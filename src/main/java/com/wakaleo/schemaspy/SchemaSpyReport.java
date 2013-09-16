@@ -52,8 +52,7 @@ public class SchemaSpyReport extends AbstractMojo {
 	 * The output directory refers to the directory in which the "schemaspy"
 	 * will be generated.
 	 *
-	 * @parameter expression="${project.reporting.outputDirectory}"
-	 *            default-value="${project.build.directory}/site"
+	 * @parameter default-value="${project.build.directory}/schemaspy"
 	 * @required
 	 */
 	private String outputDirectory;
@@ -425,15 +424,14 @@ public class SchemaSpyReport extends AbstractMojo {
 		}
 
 		targetDirectory.mkdirs();
-		File siteDir = new File(targetDirectory, "site");
-		siteDir.mkdirs();
+		
 		File outputDir = null;
 		if (outputDirectory == null) {
-			outputDir = new File(siteDir, "schemaspy");
+			outputDir = new File(targetDirectory, "schemaspy");
 			outputDir.mkdirs();
 			outputDirectory = outputDir.getAbsolutePath();
 		} else {
-			outputDir = new File(new File(outputDirectory), "schemaspy");
+			outputDir = new File(outputDirectory);
 			outputDir.mkdirs();
 		}
 		String schemaSpyDirectory = outputDir.getAbsolutePath();
