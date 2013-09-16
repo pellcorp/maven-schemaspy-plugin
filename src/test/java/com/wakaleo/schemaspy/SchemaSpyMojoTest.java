@@ -13,7 +13,6 @@ import org.apache.maven.plugin.testing.AbstractMojoTestCase;
  * @author john
  */
 public class SchemaSpyMojoTest extends AbstractMojoTestCase {
-
     public SchemaSpyMojoTest() {
     }
 
@@ -37,8 +36,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
-        System.out
-                .println("generatedFile = " + generatedFile.getAbsolutePath());
+        //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
     }
 
@@ -53,10 +51,8 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
-        System.out
-                .println("generatedFile = " + generatedFile.getAbsolutePath());
+        //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
-
     }
 
     public void testConfigurationUsingJDBCUrl() throws Exception {
@@ -70,8 +66,7 @@ public class SchemaSpyMojoTest extends AbstractMojoTestCase {
 
         // check if the reports generated
         File generatedFile = new File("./target/reports/test/schemaspy/index.html");
-        System.out
-                .println("generatedFile = " + generatedFile.getAbsolutePath());
+        //System.out.println("generatedFile = " + generatedFile.getAbsolutePath());
         assertTrue(generatedFile.exists());
         
     }

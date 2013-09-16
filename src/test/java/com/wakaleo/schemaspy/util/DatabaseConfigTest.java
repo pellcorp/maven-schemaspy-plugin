@@ -7,15 +7,17 @@
 
 package com.wakaleo.schemaspy.util;
 
-import junit.framework.*;
+import java.net.URI;
+
+import junit.framework.TestCase;
 
 /**
  * 
  * @author john
  */
-public class JDBCHelperTest extends TestCase {
+public class DatabaseConfigTest extends TestCase {
 
-    public JDBCHelperTest(String testName) {
+    public DatabaseConfigTest(String testName) {
         super(testName);
     }
 
@@ -26,38 +28,34 @@ public class JDBCHelperTest extends TestCase {
     }
 
     private final String[][] DATABASE_TYPES_TEST_DATA = {
-            { "jdbc:derby:testdb", "derby" },
-            { "jdbc:db2:testdb", "db2" },
-            { "jdbc:firebirdsql://localhost/testdb", "firebirdsql" },
-            { "jdbc:firebirdsql://server:9999/testdb", "firebirdsql" },
-            { "jdbc:hsqldb:hsql://localhost/testdb", "hsqldb" },
-            { "jdbc:hsqldb:hsql://server:9999/testdb", "hsqldb" },
-            { "jdbc:informix-sqli://localhost/testdb:INFORMIXSERVER=server",
-                    "informix-sqli" },
+            { "jdbc:derby:testdb", "derby", null, null, "testdb" },
+            { "jdbc:db2:testdb", "db2", null, null, "testdb" },
+            { "jdbc:firebirdsql://localhost/testdb", "firebirdsql", "localhost", null, "testdb" },
+            { "jdbc:firebirdsql://server:9999/testdb", "firebirdsql", "server", "9999", "testdb" },
+            { "jdbc:hsqldb:hsql://localhost/testdb", "hsqldb", "localhost", null, "testdb" },
+            { "jdbc:hsqldb:hsql://server:9999/testdb", "hsqldb", "server", "9999", "testdb" },
+            { "jdbc:informix-sqli://localhost/testdb:INFORMIXSERVER=server", "informix-sqli", "localhost", null, "testdb/INFORMIXSERVER=server" },
             { "jdbc:microsoft:sqlserver://server:9999;databaseName=testdb",
-                    "mssql" },
-            { "jdbc:jtds://server:9999/testdb", "mssql-jtds" },
-            { "jdbc:mysql://localhost/testdb", "mysql" },
-            { "jdbc:oracle:oci8:@testdb", "ora" },
-            { "jdbc:oracle:thin:@server:9999:testdb", "orathin" },
-            { "jdbc:postgresql://localhost/testdb", "pgsql" },
-            { "jdbc:sybase:Tds:server:9999/testdb", "sybase" } };
+                    "mssql", "server", "9999", "testdb" },
+            { "jdbc:jtds://server:9999/testdb", "mssql-jtds","server", "9999", "testdb"  },
+            { "jdbc:mysql://localhost/testdb", "mysql", "localhost", null, "testdb"},
+            { "jdbc:oracle:oci8:@testdb", "ora", null, null, "testdb" },
+            { "jdbc:oracle:thin:@server:9999:testdb", "orathin", "server", "9999", "testdb" },
+            { "jdbc:postgresql://localhost/testdb", "pgsql", "localhost", null, "testdb" },
+            { "jdbc:sybase:Tds:server:9999/testdb", "sybase", "server", "9999", "testdb" } };
 
-    /**
-     * Test of extractDatabaseType method, of class
-     * com.wakaleo.maven.plugin.schemaspy.util.JDBCHelper.
-     */
-    public void testExtractDatabaseType() {
-        System.out.println("extractDatabaseType");
-
-        JDBCHelper instance = new JDBCHelper();
-
-        for (String[] testDataEntry : DATABASE_TYPES_TEST_DATA) {
-            String jdbcUrl = testDataEntry[0];
-            String expectedDatabaseType = testDataEntry[1];
-            String result = instance.extractDatabaseType(jdbcUrl);
-            assertEquals(expectedDatabaseType, result);
-        }
+    public void testExtractDbUrl() throws Exception {
+    	for (String[] testDataEntry : DATABASE_TYPES_TEST_DATA) {
+    		String expectedDatabaseType = testDataEntry[1];
+    		String expectedHostname = testDataEntry[2];
+    		String expectedPort = testDataEntry[3];
+    		String expectedDbName = testDataEntry[4];
+    		
+    		DatabaseConfig config = new DatabaseConfig(testDataEntry[0]);
+    		assertEquals(testDataEntry[0] + " type mismatch", expectedDatabaseType, config.getType());
+    		assertEquals(testDataEntry[0] + " hostname mismatch", expectedHostname, config.getHost());
+    		assertEquals(testDataEntry[0] + " port mismatch", expectedPort, config.getPort());
+    		assertEquals(testDataEntry[0] + " database mismatch", expectedDbName, config.getDatabase());
+    	}
     }
-
 }

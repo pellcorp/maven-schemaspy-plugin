@@ -13,7 +13,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 
-import com.wakaleo.schemaspy.util.JDBCHelper;
+import com.wakaleo.schemaspy.util.DatabaseConfig;
 
 /**
  * The SchemaSpy Maven plugin report.
@@ -76,7 +76,6 @@ public class SchemaSpyReport extends AbstractMavenReport {
 	 * The name of the database being analysed.
 	 *
 	 * @parameter database
-	 * @required
 	 */
 	private String database;
 
@@ -339,11 +338,6 @@ public class SchemaSpyReport extends AbstractMavenReport {
 	 */
 	SchemaAnalyzer analyzer = new SchemaAnalyzer();
 
-	/**
-	 * Utility class to help determine the type of the target database.
-	 */
-	private JDBCHelper jdbcHelper = new JDBCHelper();
-
 	protected void setSchemaAnalyzer(SchemaAnalyzer analyzer) {
 		this.analyzer = analyzer;
 	}
@@ -432,10 +426,15 @@ public class SchemaSpyReport extends AbstractMavenReport {
 		}
 		String schemaSpyDirectory = outputDir.getAbsolutePath();
 		List<String> argList = new ArrayList<String>();
-
-		if ((jdbcUrl != null) && (databaseType == null)) {
-			databaseType = jdbcHelper.extractDatabaseType(jdbcUrl);
+		
+		if (jdbcUrl != null) {
+			DatabaseConfig config = new DatabaseConfig(jdbcUrl);
+			this.databaseType = config.getType();
+			this.host = config.getHost();
+			this.port = config.getPort();
+			this.database = config.getDatabase();
 		}
+		
 		addToArguments(argList, "-dp", pathToDrivers);
 		addToArguments(argList, "-db", database);
 		addToArguments(argList, "-host", host);
@@ -467,9 +466,6 @@ public class SchemaSpyReport extends AbstractMavenReport {
 		addFlagToArguments(argList, "-cid", commentsInitiallyDisplayed);
 		addFlagToArguments(argList, "-noads", noAds);
 		addFlagToArguments(argList, "-nologo", noLogo);
-		/*
-		addToArguments(argList, "-jdbcUrl", jdbcUrl);
-		*/
 
 		String[] args = (String[]) argList.toArray(new String[0]);
 		getLog().info("Generating SchemaSpy report with parameters:");
