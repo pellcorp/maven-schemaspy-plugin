@@ -1,35 +1,14 @@
-/*
- * JDBCHelperTest.java
- * JUnit based test
- *
- * Created on 18 May 2007, 14:15
- */
-
 package com.wakaleo.schemaspy.util;
-
-import java.net.URI;
 
 import junit.framework.TestCase;
 
-/**
- * 
- * @author john
- */
+import org.junit.Test;
+
 public class DatabaseConfigTest extends TestCase {
-
-    public DatabaseConfigTest(String testName) {
-        super(testName);
-    }
-
-    protected void setUp() throws Exception {
-    }
-
-    protected void tearDown() throws Exception {
-    }
-
     private final String[][] DATABASE_TYPES_TEST_DATA = {
             { "jdbc:derby:testdb", "derby", null, null, "testdb" },
             { "jdbc:db2:testdb", "db2", null, null, "testdb" },
+            { "jdbc:db2:/testdb", "db2", null, null, "/testdb" },
             { "jdbc:firebirdsql://localhost/testdb", "firebirdsql", "localhost", null, "testdb" },
             { "jdbc:firebirdsql://server:9999/testdb", "firebirdsql", "server", "9999", "testdb" },
             { "jdbc:hsqldb:hsql://localhost/testdb", "hsqldb", "localhost", null, "testdb" },
@@ -42,8 +21,12 @@ public class DatabaseConfigTest extends TestCase {
             { "jdbc:oracle:oci8:@testdb", "ora", null, null, "testdb" },
             { "jdbc:oracle:thin:@server:9999:testdb", "orathin", "server", "9999", "testdb" },
             { "jdbc:postgresql://localhost/testdb", "pgsql", "localhost", null, "testdb" },
-            { "jdbc:sybase:Tds:server:9999/testdb", "sybase", "server", "9999", "testdb" } };
+            { "jdbc:sybase:Tds:server:9999/testdb", "sybase", "server", "9999", "testdb" },
+            { "jdbc:h2:/home/jason/target/db/liquibase", "h2", null, null, "/home/jason/target/db/liquibase" },
+            
+    };
 
+    @Test
     public void testExtractDbUrl() throws Exception {
     	for (String[] testDataEntry : DATABASE_TYPES_TEST_DATA) {
     		String expectedDatabaseType = testDataEntry[1];
