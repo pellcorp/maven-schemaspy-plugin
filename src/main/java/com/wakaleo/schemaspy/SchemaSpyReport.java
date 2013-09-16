@@ -58,13 +58,6 @@ public class SchemaSpyReport extends AbstractMojo {
 	private String outputDirectory;
 
 	/**
-	 * Site rendering component for generating the HTML report.
-	 *
-	 * @component
-	 */
-	private Renderer siteRenderer;
-
-	/**
 	 * The Maven project object.
 	 *
 	 * @parameter expression="${project}"
@@ -312,13 +305,6 @@ public class SchemaSpyReport extends AbstractMojo {
 	private String connprops;
 
 	/**
-	 * Don't generate ads in reports
-	 *
-	 * @parameter noAds
-	 */
-	private Boolean noAds;
-
-	/**
 	 * Don't generate sourceforge logos in reports
 	 *
 	 * @parameter noLogo
@@ -474,7 +460,7 @@ public class SchemaSpyReport extends AbstractMojo {
 		addFlagToArguments(argList, "-hq", highQuality);
 		addToArguments(argList, "-connprops", connprops);
 		addFlagToArguments(argList, "-cid", commentsInitiallyDisplayed);
-		addFlagToArguments(argList, "-noads", noAds);
+		//addFlagToArguments(argList, "-noads", noAds);
 		addFlagToArguments(argList, "-nologo", noLogo);
 
 		String[] args = (String[]) argList.toArray(new String[0]);
