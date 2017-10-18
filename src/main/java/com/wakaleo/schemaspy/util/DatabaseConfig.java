@@ -13,6 +13,7 @@ public class DatabaseConfig {
             {"db2", "db2"},
             {"firebirdsql", "firebirdsql"},
             {"hsqldb:hsql", "hsqldb" },
+            {"hsqldb:file", "hsqldb" },
             {"informix-sqli", "informix-sqli" },
             {"microsoft:sqlserver", "mssql" },
             {"jtds", "mssql-jtds" },

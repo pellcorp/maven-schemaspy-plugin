@@ -23,7 +23,7 @@ public class DatabaseConfigTest extends TestCase {
             { "jdbc:postgresql://localhost/testdb", "pgsql", "localhost", null, "testdb" },
             { "jdbc:sybase:Tds:server:9999/testdb", "sybase", "server", "9999", "testdb" },
             { "jdbc:h2:/home/jason/target/db/liquibase", "h2", null, null, "/home/jason/target/db/liquibase" },
-            
+            { "jdbc:hsqldb:file:/home/jason/target/db/liquibase", "hsqldb", null, null, "/home/jason/target/db/liquibase" },
     };
 
     @Test
